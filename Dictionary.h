@@ -26,7 +26,7 @@ public:
         return hashTable[key];
     }
 
-    bool contains(const KeyType &key) const {
+    bool contains(const KeyType &key) {
         return hashTable.contains(key);
     }
 
