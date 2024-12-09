@@ -21,5 +21,16 @@ Dictionary<std::string, int> theMostFrequentSubsequences(const std::string &inpu
     return result;
 }
 
+void FindingTheMostFrequentSubsequence(std::string input, int lmin, int lmax)
+{
+    Dictionary<std::string, int> result = theMostFrequentSubsequences(input, lmin, lmax);
+
+    for (auto it = result.begin(); it != result.end(); ++it) {
+        auto [key, value] = *it;
+        std::cout << "Subsequence: " << key << ", Frequency: " << value << std::endl;
+    }
+    
+}
+
 #endif //LAB3_MOST_FREQUENT
 

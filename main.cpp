@@ -10,6 +10,7 @@
 #include "KnapsackProblem.h"
 #include "AlphabetIndex.h"
 #include <ncurses.h>
+
 //struct Item {
 //    int weight;
 //    int value;
@@ -191,24 +192,149 @@
 //    return index;
 //}
 
+// Прототип вашей функции
+
+#include <ncurses.h>
+#include <string>
+#include <sstream>
+#include <stdexcept>
+
+// Прототип вашей функции
+
+// Вспомогательная функция для отображения окна ввода
+std::string inputWindow(const std::string &prompt);
+
+int inputWindowPages(const std::string &prompt);
+
+// Вспомогательная функция для отображения окна результата
+void outputWindow(const std::string &result);
+
+// Отображение главного меню
+void displayMenu(int highlight);
+
 int main() {
-//    try {
-//        // Настройки
-//        std::string inputFilePath = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/input.txt";
-//        std::string outputFilePath = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/output.txt";
-//        int pageSize = 100; // Размер страницы
-//        bool sizeInWords = true; // Измерение страницы в словах
-//
-//        // Создание алфавитного указателя
-//        buildAlphabeticalIndexFromFile(inputFilePath, pageSize, sizeInWords, outputFilePath);
-//
-//        std::cout << "Алфавитный указатель успешно создан и сохранён в " << outputFilePath << std::endl;
-//    } catch (const std::exception &ex) {
-//        std::cerr << "Ошибка: " << ex.what() << std::endl;
-//    }
-    StartBuildingAlphabetIndex();
+    // Инициализация ncurses
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+    noecho();
+
+    int highlight = 0; // Подсвеченная кнопка
+    int ch;
+
+    // Отображение меню
+    displayMenu(highlight);
+
+    while ((ch = getch()) != 'q') { // Нажатие 'q' завершает программу
+        switch (ch) {
+            case KEY_UP:
+                if (highlight > 0) {
+                    highlight--;
+                }
+                break;
+            case KEY_DOWN:
+                if (highlight < 0) {
+                    highlight++;
+                }
+                break;
+            case 10: // Нажатие Enter
+                switch (highlight) {
+                    case 0: {
+                        // Ввод текста для функции
+                        std::string input = inputWindow("Entering file name");
+                        
+                        int pagesCount = inputWindowPages("Entering pages size");
+                        // Вызываем вашу функцию
+                        StartBuildingAlphabetIndex(input, pagesCount);
+                        
+                        // Отображаем результат в новом окне
+//                        outputWindow(resultOutput.str());
+                        break;
+                    }
+                    case 1:
+                        outputWindow("func 2 is not realised yet");
+                        break;
+                    case 2:
+                        outputWindow("func 3 is not realised yet");
+                        break;
+                    case 3:
+                        outputWindow("func 4 is not realised yet");
+                        break;
+                }
+                displayMenu(highlight); // Возврат к меню
+                break;
+        }
+        displayMenu(highlight); // Обновляем меню
+    }
+
+    endwin(); // Завершение ncurses
     return 0;
 }
 
+// Отображение главного меню
+void displayMenu(int highlight) {
+    clear();
+    const char *options[] = {"Alphabet index", "func 2", "func 3", "func 4"};
+    int numOptions = sizeof(options) / sizeof(options[0]);
 
+    mvprintw(0, 0, "Choose the func and press Enter:");
 
+    for (int i = 0; i < numOptions; i++) {
+        if (i == highlight) {
+            attron(A_REVERSE);
+            mvprintw(i + 3, 10, options[i]);
+            attroff(A_REVERSE);
+        } else {
+            mvprintw(i + 3, 10, options[i]);
+        }
+    }
+
+    refresh();
+}
+
+// Окно для ввода текста
+std::string inputWindow(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter file name: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return std::string(buffer);
+}
+
+int inputWindowPages(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter pages size: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return stoi(std::string(buffer));
+}
+
+// Окно для вывода результата
+void outputWindow(const std::string &result) {
+    clear();
+    mvprintw(1, 1, "Result:");
+    mvprintw(3, 1, result.c_str());
+    mvprintw(5, 1, "Press Enter to return to main menu...");
+    refresh();
+
+    getch(); // Ожидание Enter
+}
+
+//// Реализация вашей функции (пример)
+//void StartBuildingAlphabetIndex(const std::string &input, std::ostream &output) {
+//    // Простая обработка текста
+//    output << "Вы ввели: " << input << "\n";
+//    output << "Функция StartBuildingAlphabetIndex выполнена!";
+//}

@@ -40,7 +40,6 @@ Dictionary<std::string, std::vector<int>> buildAlphabeticalIndexFromFile(
         }
     }
 
-    std::cout << inputText << std::endl;
     // Разбиение текста на слова
     std::istringstream wordsStream(inputText);
     std::vector<std::string> words;
@@ -100,16 +99,16 @@ Dictionary<std::string, std::vector<int>> buildAlphabeticalIndexFromFile(
     return index;
 }
 
-void StartBuildingAlphabetIndex()
+void StartBuildingAlphabetIndex(std::string fileName, int pageSize)
 {
-    std::cout << "Enter name of using file" << std::endl;
-    std::string fileName;
-    std::cin >> fileName;
+//    std::cout << "Enter name of using file" << std::endl;
+//    std::string fileName;
+//    std::cin >> fileName;
     std::string RealFileName = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/" + fileName;
     std::string outputFilePath = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/output.txt";
     std::cout << "Enter page size" << std::endl;
-    int pageSize;// Размер страницы
-    std::cin >> pageSize;
+//    int pageSize;// Размер страницы
+//    std::cin >> pageSize;
     bool sizeInWords = false; // Измерение страницы в словах
 
     // Создание алфавитного указателя
