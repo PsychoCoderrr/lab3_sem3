@@ -1,6 +1,7 @@
 #ifndef LAB3_MOST_FREQUENT
 #define LAB3_MOST_FREQUENT
 #include "Dictionary.h"
+#include <fstream>
 
 Dictionary<std::string, int> theMostFrequentSubsequences(const std::string &input, int lmin, int lmax) {
     Dictionary<std::string, int> result;
@@ -24,11 +25,20 @@ Dictionary<std::string, int> theMostFrequentSubsequences(const std::string &inpu
 void FindingTheMostFrequentSubsequence(std::string input, int lmin, int lmax)
 {
     Dictionary<std::string, int> result = theMostFrequentSubsequences(input, lmin, lmax);
+    std::string outputFilePath = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/outputSequences.txt";
+    // Открытие файла для записи
+    std::ofstream outputFile(outputFilePath);
+    if (!outputFile) {
+        throw std::runtime_error("Не удалось открыть файл для записи.");
+    }
 
+    // Запись результатов в файл
     for (auto it = result.begin(); it != result.end(); ++it) {
         auto [key, value] = *it;
-        std::cout << "Subsequence: " << key << ", Frequency: " << value << std::endl;
+        outputFile << "Subsequence: " << key << ", Frequency: " << value << std::endl;
     }
+
+    outputFile.close(); // Закрытие файла
     
 }
 

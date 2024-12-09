@@ -194,6 +194,12 @@
 
 // Прототип вашей функции
 
+
+
+
+
+
+
 #include <ncurses.h>
 #include <string>
 #include <sstream>
@@ -205,6 +211,9 @@
 std::string inputWindow(const std::string &prompt);
 
 int inputWindowPages(const std::string &prompt);
+std::string inputWindowSequence(const std::string &prompt);
+int inputWindowLMin(const std::string &prompt);
+int inputWindowLMax(const std::string &prompt);
 
 // Вспомогательная функция для отображения окна результата
 void outputWindow(const std::string &result);
@@ -233,7 +242,7 @@ int main() {
                 }
                 break;
             case KEY_DOWN:
-                if (highlight < 0) {
+                if (highlight < 3) {
                     highlight++;
                 }
                 break;
@@ -251,15 +260,21 @@ int main() {
 //                        outputWindow(resultOutput.str());
                         break;
                     }
-                    case 1:
-                        outputWindow("func 2 is not realised yet");
+                    case 1:{
+                        std::string sequence = inputWindowSequence("Entering Sequence");
+                        int lmin = inputWindowLMin("Entering minimal length");
+                        int lmax = inputWindowLMax("Entering maximum length");
+                        FindingTheMostFrequentSubsequence(sequence, lmin, lmax);
                         break;
-                    case 2:
+                    }
+                    case 2:{
                         outputWindow("func 3 is not realised yet");
                         break;
-                    case 3:
+                    }
+                    case 3:{
                         outputWindow("func 4 is not realised yet");
                         break;
+                    }
                 }
                 displayMenu(highlight); // Возврат к меню
                 break;
@@ -321,6 +336,48 @@ int inputWindowPages(const std::string &prompt) {
     return stoi(std::string(buffer));
 }
 
+std::string inputWindowSequence(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter your sequence: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return std::string(buffer);
+}
+
+int inputWindowLMin(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter minimal length: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return stoi(std::string(buffer));
+}
+
+int inputWindowLMax(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter maximum length: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return stoi(std::string(buffer));
+}
+
 // Окно для вывода результата
 void outputWindow(const std::string &result) {
     clear();
@@ -337,4 +394,12 @@ void outputWindow(const std::string &result) {
 //    // Простая обработка текста
 //    output << "Вы ввели: " << input << "\n";
 //    output << "Функция StartBuildingAlphabetIndex выполнена!";
+//}
+
+
+//int main()
+//{
+//    std::string input_string = "abcabcabcabc";
+//    FindingTheMostFrequentSubsequence(input_string, 2, 3);
+//    return 0;
 //}

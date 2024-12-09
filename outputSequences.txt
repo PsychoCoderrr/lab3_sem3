@@ -1,0 +1,6 @@
+Subsequence: abc, Frequency: 5
+Subsequence: bc, Frequency: 5
+Subsequence: cab, Frequency: 4
+Subsequence: ca, Frequency: 4
+Subsequence: ab, Frequency: 5
+Subsequence: bca, Frequency: 4
