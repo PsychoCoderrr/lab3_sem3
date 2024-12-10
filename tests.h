@@ -4,6 +4,7 @@
 #include <cassert>
 #include "RBTree.h"
 #include "KnapsackProblem.h"
+#include "HashTable.h"
 
 void testInsertAndSearch() {
     RedBlackTree<int, std::string> tree;
@@ -36,8 +37,6 @@ void testRemove() {
 
     tree.remove(5);
     assert(tree.find(5) == tree.getNil());
-
-    std::cout << "Test Remove passed!" << std::endl;
 }
 
 void testKnapsack1()
@@ -162,6 +161,218 @@ void testKnapsack7()
     int capacity = 15;
     int result = KnapsackProblemSolving(items, capacity);
     assert(result == 15);
+}
+
+
+
+
+
+
+
+struct TestStruct {
+    int *value_;
+    TestStruct() : value_(new int(0)) {}
+    TestStruct(int value) : value_(new int(value)) {}
+    TestStruct(const TestStruct &other) : value_(new int(*other.value_)) {}
+    TestStruct(TestStruct &&other) : value_(other.value_) {
+        other.value_ = nullptr;
+    }
+
+    TestStruct &operator=(const TestStruct &other) {
+        if (this == &other) {
+            return *this;
+        }
+        delete value_;
+        value_ = new int(*other.value_);
+        return *this;
+    }
+
+    TestStruct &operator=(TestStruct &&other) {
+        if (this == &other) {
+            return *this;
+        }
+        delete value_;
+        value_ = other.value_;
+        other.value_ = nullptr;
+        return *this;
+    }
+    TestStruct &operator=(int value) {
+        delete value_;
+        value_ = new int(value);
+        return *this;
+    }
+    ~TestStruct() {
+        delete value_;
+    }
+
+    int operator*() {
+        return *value_;
+    }
+};
+
+void testDefaultConstructor() {
+    THashTable<int, TestStruct> table;
+    assert(table.size() == 0);
+    assert(table.capacity() == 0);
+    
+}
+
+void testParameterizedConstructor() {
+    THashTable<int, TestStruct> table(10);
+    assert(table.size() == 0);
+    assert(table.capacity() == 10);
+    
+}
+
+void testInsert() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    assert(table.size() == 2);
+    assert(table.capacity() == 10);
+    assert(*(*(table.find(1))).value_ == 1);
+    assert(*(*(table.find(2))).value_ == 2);
+    
+}
+
+void testRemoveExistingKey() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    table.insert(3, 3);
+
+    table.remove(1);
+    assert(table.size() == 2);
+    assert(table.find(1) == table.end());
+
+    table.remove(2);
+    assert(table.size() == 1);
+    assert(table.find(2) == table.end());
+   
+}
+
+void testContains() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    assert(table.contains(1));
+    assert(table.contains(2));
+    assert(!table.contains(3));
+    
+}
+
+void testSizeAndCapacity() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    assert(table.size() == 2);
+    assert(table.capacity() == 10);
+    
+}
+
+void testClear() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    table.clear();
+    assert(table.size() == 0);
+    assert(table.capacity() == 0);
+    
+}
+
+void testResize() {
+    THashTable<int, TestStruct> table(2);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    table.insert(3, 3);
+    assert(table.size() == 3);
+    assert(table.capacity() == 4);
+    
+}
+
+void testIterator() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    auto it = table.begin();
+    assert((*it).key_ == 1);
+    assert(*((*it).value_) == 1);
+    ++it;
+    assert((*it).key_ == 2);
+    assert(*((*it).value_) == 2);
+    
+}
+
+void testFind() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    auto it = table.find(1);
+    assert((*it).key_ == 1);
+    assert(*((*it).value_) == 1);
+    
+}
+
+void testOperatorBracket() {
+    THashTable<int, TestStruct> table(10);
+    table.insert(1, 1);
+    table.insert(2, 2);
+    assert(*(table[1]) == 1);
+    assert(*(table[2]) == 2);
+    
+}
+
+void testCopyAssignment() {
+    THashTable<int, TestStruct> hashTable;
+    hashTable.insert(-1, 1);
+    hashTable.insert(-2, 2);
+
+    THashTable<int, TestStruct> anotherHashTable;
+    anotherHashTable = hashTable;
+
+    assert(anotherHashTable.size() == 2);
+    assert(*(anotherHashTable[-1]) == 1);
+    assert(*(anotherHashTable[-2]) == 2);
+    
+}
+
+void testMoveAssignment() {
+    THashTable<int, TestStruct> hashTable;
+    hashTable.insert(-1, 1);
+    hashTable.insert(-2, 2);
+
+    THashTable<int, TestStruct> anotherHashTable;
+    anotherHashTable = std::move(hashTable);
+
+    assert(anotherHashTable.size() == 2);
+    assert(*(anotherHashTable[-1]) == 1);
+    assert(*(anotherHashTable[-2]) == 2);
+}
+
+void startTests()
+{
+    testInsertAndSearch();
+    testRemove();
+    testKnapsack1();
+    testKnapsack2();
+    testKnapsack3();
+    testKnapsack4();
+    testKnapsack5();
+    testKnapsack6();
+    testKnapsack7();
+    testDefaultConstructor();
+    testParameterizedConstructor();
+    testInsert();
+    testRemoveExistingKey();
+    testContains();
+    testSizeAndCapacity();
+    testClear();
+    testResize();
+    testIterator();
+    testFind();
+    testOperatorBracket();
+    testCopyAssignment();
+    testMoveAssignment();
 }
 
 #endif //LAB3_TESTS
