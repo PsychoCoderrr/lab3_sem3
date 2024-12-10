@@ -15,6 +15,7 @@
 #include "KnapsackProblem.h"
 #include "AlphabetIndex.h"
 #include "FuncForUI.h"
+#include "tests.h"
 
 int main() {
     // Инициализация ncurses
@@ -83,4 +84,5 @@ int main() {
     endwin(); // Завершение ncurses
     return 0;
 }
+
 
