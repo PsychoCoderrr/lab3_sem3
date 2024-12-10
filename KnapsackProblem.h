@@ -6,6 +6,11 @@
 struct Item {
     int weight;
     int value;
+    Item(int weight_, int value_)
+    {
+        weight = weight_;
+        value = value_;
+    }
     double valuePerWeight() const {
         return static_cast<double>(value) / weight;
     }
@@ -79,6 +84,13 @@ public:
         return maxValue;
     }
 };
+
+int KnapsackProblemSolving(std::vector<Item> items, int capacity)
+{
+    KnapsackSolver solver(capacity, items);
+    int maxValue = solver.solve();
+    return maxValue;
+}
 
 
 

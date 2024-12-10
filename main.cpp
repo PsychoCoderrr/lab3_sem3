@@ -214,6 +214,10 @@ int inputWindowPages(const std::string &prompt);
 std::string inputWindowSequence(const std::string &prompt);
 int inputWindowLMin(const std::string &prompt);
 int inputWindowLMax(const std::string &prompt);
+int inputWindowLMin(const std::string &prompt);
+int inputWindowKnapsackCapacity(const std::string &prompt);
+int inputWindowCountOfElements(const std::string &prompt);
+std::vector<Item> inputWindowItems(const std::string &prompt, int count);
 
 // Вспомогательная функция для отображения окна результата
 void outputWindow(const std::string &result);
@@ -268,7 +272,10 @@ int main() {
                         break;
                     }
                     case 2:{
-                        outputWindow("func 3 is not realised yet");
+                        int capacity = inputWindowKnapsackCapacity("Entering capacity of knapsack");
+                        int count = inputWindowCountOfElements("Entering count of elements");
+                        std::vector<Item> items = inputWindowItems("Entering items of knapsack", count);
+                        outputWindow(std::to_string(KnapsackProblemSolving(items, capacity)));
                         break;
                     }
                     case 3:{
@@ -289,7 +296,7 @@ int main() {
 // Отображение главного меню
 void displayMenu(int highlight) {
     clear();
-    const char *options[] = {"Alphabet index", "func 2", "func 3", "func 4"};
+    const char *options[] = {"Alphabet index", "The most frequent sequence", "Knapsack Problem Solving", "Testing"};
     int numOptions = sizeof(options) / sizeof(options[0]);
 
     mvprintw(0, 0, "Choose the func and press Enter:");
@@ -378,6 +385,20 @@ int inputWindowLMax(const std::string &prompt) {
     return stoi(std::string(buffer));
 }
 
+int inputWindowKnapsackCapacity(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter capacity: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return stoi(std::string(buffer));
+}
+
 // Окно для вывода результата
 void outputWindow(const std::string &result) {
     clear();
@@ -388,6 +409,52 @@ void outputWindow(const std::string &result) {
 
     getch(); // Ожидание Enter
 }
+
+int inputWindowCountOfElements(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter count of elements: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return stoi(std::string(buffer));
+}
+
+std::vector<Item> inputWindowItems(const std::string &prompt, int count) {
+    std::vector<Item> result;
+    for(int i = 0; i < count; i++)
+    {
+        clear();
+        mvprintw(1, 1, prompt.c_str());
+        mvprintw(3, 1, "Enter weight: ");
+        refresh();
+        
+        char buffer1[1024];
+        echo();
+        getnstr(buffer1, 1023); // Ограничение длины ввода
+        noecho();
+        
+        clear();
+        mvprintw(1, 1, prompt.c_str());
+        mvprintw(3, 1, "Enter value: ");
+        refresh();
+        
+        char buffer2[1024];
+        echo();
+        getnstr(buffer2, 1023); // Ограничение длины ввода
+        noecho();
+        Item temp_item(stoi(std::string(buffer1)), stoi(std::string(buffer2)));
+        result.push_back(temp_item);
+    }
+    
+
+    return result;
+}
+
 
 //// Реализация вашей функции (пример)
 //void StartBuildingAlphabetIndex(const std::string &input, std::ostream &output) {
