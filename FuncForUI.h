@@ -15,10 +15,10 @@ void displayMenu(int highlight) {
     for (int i = 0; i < numOptions; i++) {
         if (i == highlight) {
             attron(A_REVERSE);
-            mvprintw(i + 3, 10, options[i]);
+            mvprintw(i + 3, 0, options[i]);
             attroff(A_REVERSE);
         } else {
-            mvprintw(i + 3, 10, options[i]);
+            mvprintw(i + 3, 0, options[i]);
         }
     }
 

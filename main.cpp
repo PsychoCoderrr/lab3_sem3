@@ -52,8 +52,8 @@ int main() {
                         // Вызываем вашу функцию
                         StartBuildingAlphabetIndex(input, pagesCount);
                         
-                        // Отображаем результат в новом окне
-//                        outputWindow(resultOutput.str());
+                         //Отображаем результат в новом окне
+                        outputWindow("Alphabet index was saved into file output.txt");
                         break;
                     }
                     case 1:{
@@ -61,6 +61,7 @@ int main() {
                         int lmin = inputWindowLMin("Entering minimal length");
                         int lmax = inputWindowLMax("Entering maximum length");
                         FindingTheMostFrequentSubsequence(sequence, lmin, lmax);
+                        outputWindow("Sequences and their frequency were saved to a file outputSequences.txt");
                         break;
                     }
                     case 2:{

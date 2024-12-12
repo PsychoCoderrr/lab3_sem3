@@ -280,19 +280,19 @@ public:
         return nil;
     }
 
-    void printInOrder(Node<Key, Data>* node) const {
-        if (node != nil) {
-            printInOrder(node->left);
-            std::cout << node->key << " : ";
-            for (const auto& data : node->dataList) {
-                std::cout << data << " ";
-            }
-            std::cout << std::endl;
-            printInOrder(node->right);
-        }
-    }
-
-    void print() const { printInOrder(root); }
+//    void printInOrder(Node<Key, Data>* node) const {
+//        if (node != nil) {
+//            printInOrder(node->left);
+//            std::cout << node->key << " : ";
+//            for (const auto& data : node->dataList) {
+//                std::cout << data << " ";
+//            }
+//            std::cout << std::endl;
+//            printInOrder(node->right);
+//        }
+//    }
+//
+//    void print() const { printInOrder(root); }
 
     void clear(Node<Key, Data>* node) {
         if (node != nil) {
