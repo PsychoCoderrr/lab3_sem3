@@ -19,6 +19,11 @@ set(SOURCE_FILES
     KnapsackProblem.h
     MostFrequent.h
     RBTree.h
+    FuncForUI.h
+    tests.h
+    ArraySequence.h
+    ArrayIterator.h
+    Sequence.h
 )
 
 # Добавляем исполняемый файл

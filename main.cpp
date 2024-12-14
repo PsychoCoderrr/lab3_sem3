@@ -16,6 +16,10 @@
 #include "AlphabetIndex.h"
 #include "FuncForUI.h"
 #include "tests.h"
+#include "ArraySequence.h"
+#include "Rows.h"
+#include "Pages.h"
+#include "Book.h"
 
 int main() {
     // Инициализация ncurses
