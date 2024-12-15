@@ -151,6 +151,16 @@ template <typename T> class ArraySequence : public Sequence<T>
         elements[0] = item;
     }
     
+    void Clear()
+    {
+        if (elements) {
+            delete[] elements;
+            elements = nullptr;
+        }
+        size = 0;
+        capacity = 0;
+    }
+    
     reference operator[](int index) override
     {
         if (size <= index)
@@ -183,5 +193,25 @@ template <typename T> class ArraySequence : public Sequence<T>
             }
         }
         return true;
+    }
+    
+    ArraySequence<T> getSubSequence(int startIndex, int endIndex) const
+    {
+        if (startIndex < 0 || endIndex >= size || startIndex > endIndex)
+        {
+            throw std::out_of_range("Invalid indices for getSubSequence");
+        }
+
+        // Количество элементов в подпоследовательности
+        int subSequenceSize = endIndex - startIndex + 1;
+
+        // Создаем новый ArraySequence и копируем элементы
+        ArraySequence<T> subSequence;
+        for (int i = 0; i < subSequenceSize; i++)
+        {
+            subSequence.Append(elements[startIndex + i]);
+        }
+
+        return subSequence;
     }
 };

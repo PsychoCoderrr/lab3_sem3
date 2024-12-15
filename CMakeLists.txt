@@ -15,6 +15,8 @@ set(SOURCE_FILES
     # Заголовочные файлы
     AlphabetIndex.h
     Dictionary.h
+    vector.hpp
+    iterator/iterator.hpp
     HashTable.h
     KnapsackProblem.h
     MostFrequent.h
