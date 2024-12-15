@@ -42,39 +42,12 @@ Dictionary<std::string, std::vector<int>> buildAlphabeticalIndexFromFile(
             ch = static_cast<char>(std::tolower(ch));
         }
     }
-    
-    
-    
-    
-    
-//    int row_size = 5;
-//    int page_size = 3;
 
-    // Разбиваем текст на строки
     Vector<Row> rows = lexer(inputText, rowSize);
 
-    // Разбиваем строки на страницы
     Vector<Page> pages = PageMaker(rows, pageSize);
     
     Book item(pages);
-//
-//    // Выводим страницы
-//    std::cout << "here programm was too" << std::endl;
-//    std::cout << "\nBook:\n";
-//    for (int i = 0; i < item.GetPageCount(); i++)
-//    {
-//        std::cout << "Page " << i + 1 << ":\n";
-//
-//        // Получаем текущую страницу
-//        Page page = item.GetPage(i);
-//
-//        // Для каждой страницы выводим строки
-//        for (int j = 0; j < item.GetPage(i).getPageSize(); j++)
-//        {
-//            std::cout << page.getRow(j).get() << '\n';
-//        }
-//        std::cout << '\n';
-//    }
     std::string bookOutputFilePath = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/outputbook.txt";
     std::ofstream bookOutputFile(bookOutputFilePath);
     if (!bookOutputFile) {
@@ -85,10 +58,8 @@ Dictionary<std::string, std::vector<int>> buildAlphabeticalIndexFromFile(
     for (int i = 0; i < item.GetPageCount(); i++) {
         bookOutputFile << "Page " << i + 1 << ":\n";
 
-        // Получаем текущую страницу
         Page page = item.GetPage(i);
 
-        // Для каждой страницы записываем строки
         for (int j = 0; j < item.GetPage(i).getPageSize(); j++) {
             bookOutputFile << page.getRow(j).get() << '\n';
         }

@@ -1,6 +1,5 @@
 #ifndef LAB3_ROWS
 #define LAB3_ROWS
-#include "ArraySequence.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -30,30 +29,6 @@ public:
     {
         return row_;
     }
-//    Row(std::string& text, int row_size)
-//    {
-//        int count = 0;
-//        std::istringstream wordsStream(text);
-//        std::string line;
-//        std::string word;
-//        while (wordsStream >> word)
-//        {
-//            line = line + word + " ";
-//            count++;
-//            if (count == row_size)
-//            {
-//                rows->Append(line);
-//                line.clear();
-//                count = 0;
-//            }
-//        }
-//        if (!line.empty())
-//        {
-//            rows->Append(line);
-//            line.clear();
-//            count = 0;
-//        }
-//    }
 };
 
 Vector<Row> lexer(std::string& text, int row_size)

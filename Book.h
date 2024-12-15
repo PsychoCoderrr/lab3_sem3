@@ -1,7 +1,8 @@
 #ifndef LAB3_BOOK_H
 #define LAB3_BOOK_H
-#include "ArraySequence.h"
+
 #include "Pages.h"
+#include "vector.hpp"
 
 class Book
 {
