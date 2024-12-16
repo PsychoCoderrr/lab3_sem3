@@ -22,8 +22,10 @@
 #include "Book.h"
 #include "vector.hpp"
 #include "Generator.hpp"
+
+
 int main() {
-    // Инициализация ncurses
+    startTests();
     initscr();
     raw();
     keypad(stdscr, TRUE);
@@ -75,7 +77,10 @@ int main() {
                         break;
                     }
                     case 3:{
-                        startTests();
+                        int count = inputWindowCountTest("Entering count for test");
+                        int lmin = inputWindowLMin("Entering minimal length");
+                        int lmax = inputWindowLMax("Entering maximum length");
+                        testFrequentSubsequences(count, lmin, lmax);
                         outputWindow("Tests have been passed");
                         break;
                     }
@@ -89,4 +94,3 @@ int main() {
     endwin();
     return 0;
 }
-

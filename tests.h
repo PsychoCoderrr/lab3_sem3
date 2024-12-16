@@ -5,6 +5,8 @@
 #include "RBTree.h"
 #include "KnapsackProblem.h"
 #include "HashTable.h"
+#include "Generator.hpp"
+#include <iterator>
 
 void testInsertAndSearch() {
     RedBlackTree<int, std::string> tree;
@@ -349,6 +351,8 @@ void testMoveAssignment() {
     assert(*(anotherHashTable[-2]) == 2);
 }
 
+
+
 void startTests()
 {
     testInsertAndSearch();
@@ -373,6 +377,37 @@ void startTests()
     testOperatorBracket();
     testCopyAssignment();
     testMoveAssignment();
+}
+
+void testFrequentSubsequences(int count, int lmin, int lmax)
+{
+    std::string seq = GenerateSequence(count);
+    Dictionary<std::string, int> result = theMostFrequentSubsequences(seq, lmin, lmax);
+        for (auto it = result.begin(); it != result.end(); ++it) {
+            // Декомпозиция текущей пары
+            std::pair<std::string, int> entry = *it;
+            const std::string &subsequence = entry.first; // Подстрока
+            int expectedCount = entry.second;            // Ожидаемое количество
+
+            // Пропускаем пустую строку
+            
+
+        if (subsequence.empty()) {
+            //std::cerr << "Ошибка: Обнаружена пустая подстрока в словаре. Пропускаем проверку.\n";
+            continue;
+        }
+            // Подсчет количества вхождений подстроки в строку seq
+            int actualCount = 0;
+            size_t pos = seq.find(subsequence, 0); // Начинаем поиск с начала строки
+            while (pos != std::string::npos) {
+                ++actualCount;
+                pos = seq.find(subsequence, pos + 1); // Продолжаем поиск
+            }
+
+            // Используем assert для проверки фактического количества
+            assert(actualCount == expectedCount &&
+                   "Количество вхождений подстроки не совпадает с ожидаемым значением.");
+        }
 }
 
 #endif //LAB3_TESTS

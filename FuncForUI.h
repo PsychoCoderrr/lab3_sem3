@@ -68,6 +68,21 @@ int inputWindowRows(const std::string &prompt) {
     return stoi(std::string(buffer));
 }
 
+int inputWindowCountTest(const std::string &prompt) {
+    clear();
+    mvprintw(1, 1, prompt.c_str());
+    mvprintw(3, 1, "Enter count of elements in sequence: ");
+    refresh();
+
+    char buffer[1024];
+    echo();
+    getnstr(buffer, 1023); // Ограничение длины ввода
+    noecho();
+
+    return stoi(std::string(buffer));
+}
+
+
 
 std::string inputWindowSequence(const std::string &prompt) {
     clear();

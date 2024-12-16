@@ -1,0 +1,5 @@
+Max Value: 103
+Total Weight: 5
+Items in the knapsack:
+Item 1 (Weight: 2, Value: 45)
+Item 2 (Weight: 3, Value: 58)
