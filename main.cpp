@@ -16,7 +16,6 @@
 #include "AlphabetIndex.h"
 #include "FuncForUI.h"
 #include "tests.h"
-#include "ArraySequence.h"
 #include "Rows.h"
 #include "Pages.h"
 #include "Book.h"
@@ -58,7 +57,7 @@ int main() {
                         int pagesCount = inputWindowPages("Entering pages size");
                         int rowsSize = inputWindowRows("Entering rows size");
                         StartBuildingAlphabetIndex(input, pagesCount, rowsSize);
-                        outputWindow("Alphabet index was saved into file output.txt");
+                        outputWindow("Alphabet index was saved into file output.txt and formated book into outputbook.txt");
                         break;
                     }
                     case 1:{

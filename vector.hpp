@@ -3,7 +3,8 @@
 #include "./iterator/iterator.hpp"
 #include <algorithm>
 
-template <typename T> class Vector
+template <typename T>
+class Vector
 {
     protected:
         T *data = nullptr;
