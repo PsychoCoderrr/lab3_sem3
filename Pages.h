@@ -2,7 +2,8 @@
 #define LAB3_PAGES
 
 #include "Rows.h"
-#include "vector.hpp"
+#include "DynamicArray.hpp"
+
 class Page
 {
 private:

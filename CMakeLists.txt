@@ -15,7 +15,7 @@ set(SOURCE_FILES
     # Заголовочные файлы
     AlphabetIndex.h
     Dictionary.h
-    vector.hpp
+    DynamicArray.hpp
     iterator/iterator.hpp
     HashTable.h
     KnapsackProblem.h
@@ -23,9 +23,6 @@ set(SOURCE_FILES
     RBTree.h
     FuncForUI.h
     tests.h
-    ArraySequence.h
-    ArrayIterator.h
-    Sequence.h
 )
 
 # Добавляем исполняемый файл

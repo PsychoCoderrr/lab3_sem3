@@ -2,7 +2,7 @@
 #define LAB3_BOOK_H
 
 #include "Pages.h"
-#include "vector.hpp"
+#include "DynamicArray.hpp"
 
 class Book
 {

@@ -19,7 +19,7 @@
 #include "Rows.h"
 #include "Pages.h"
 #include "Book.h"
-#include "vector.hpp"
+#include "DynamicArray.hpp"
 #include "Generator.hpp"
 
 

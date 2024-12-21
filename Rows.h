@@ -6,7 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <sstream>
-#include "vector.hpp"
+#include "DynamicArray.hpp"
 
 class Row
 {

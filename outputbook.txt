@@ -1,49 +1,100 @@
 Book:
 Page 1:
-life believe is not a 
-dream so dark as sages 
+life believe 
+is not 
+a dream 
 
 Page 2:
-say oft a little morning 
-rain foretells a pleasant day 
+so dark 
+as sages 
+say oft 
 
 Page 3:
-sometimes there are clouds of 
-gloom but these are transient 
+a little 
+morning rain 
+foretells a 
 
 Page 4:
-all if the shower will 
-make the roses bloom oh 
+pleasant day 
+sometimes there 
+are clouds 
 
 Page 5:
-why lament its fall rapidly 
-merrily life s sunny hours 
+of gloom 
+but these 
+are transient 
 
 Page 6:
-flit by gratefully cheerily enjoy 
-them as they fly what 
+all if 
+the shower 
+will make 
 
 Page 7:
-though death at times steps 
-in and calls our best 
+the roses 
+bloom oh 
+why lament 
 
 Page 8:
-away what though sorrow seems 
-to win o er hope 
+its fall 
+rapidly merrily 
+life s 
 
 Page 9:
-a heavy sway yet hope 
-again elastic springs unconquered though 
+sunny hours 
+flit by 
+gratefully cheerily 
 
 Page 10:
-she fell still buoyant are 
-her golden wings still strong 
+enjoy them 
+as they 
+fly what 
 
 Page 11:
-to bear us well manfully 
-fearlessly the day of trial 
+though death 
+at times 
+steps in 
 
 Page 12:
-bear for gloriously victoriously can 
-courage quell despair 
+and calls 
+our best 
+away what 
+
+Page 13:
+though sorrow 
+seems to 
+win o 
+
+Page 14:
+er hope 
+a heavy 
+sway yet 
+
+Page 15:
+hope again 
+elastic springs 
+unconquered though 
+
+Page 16:
+she fell 
+still buoyant 
+are her 
+
+Page 17:
+golden wings 
+still strong 
+to bear 
+
+Page 18:
+us well 
+manfully fearlessly 
+the day 
+
+Page 19:
+of trial 
+bear for 
+gloriously victoriously 
+
+Page 20:
+can courage 
+quell despair 
 
