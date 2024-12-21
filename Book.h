@@ -7,7 +7,7 @@
 class Book
 {
 private:
-    Vector<Page> book_;
+    DynamicArray<Page> book_;
 public:
     Book() = default;
     
@@ -16,12 +16,12 @@ public:
         book_.push_back(insert_page);
     }
     
-    Book(Vector<Page>& book)
+    Book(DynamicArray<Page>& book)
     {
         book_ = book;
     }
     
-    Book(Vector<Page>&& other) noexcept
+    Book(DynamicArray<Page>&& other) noexcept
         : book_(std::move(other)) {};
     
     size_t GetPageCount()

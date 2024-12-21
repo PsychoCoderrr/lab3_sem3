@@ -4,7 +4,7 @@
 #include <algorithm>
 
 template <typename T>
-class Vector
+class DynamicArray
 {
     protected:
         T *data = nullptr;
@@ -12,16 +12,16 @@ class Vector
         size_t capacity = 0;
 
     public:
-        typedef Vector_iterator<T> iterator;
+        typedef DynamicArray_iterator<T> iterator;
 
-        Vector();
-        Vector(const size_t capacity);
-        Vector(const size_t size, T default_value);
-        Vector(const std::initializer_list<T> list);
-        Vector(const Vector<T> &input_vector);
-        Vector(Vector<T> &&input_vector);
+    DynamicArray();
+    DynamicArray(const size_t capacity);
+    DynamicArray(const size_t size, T default_value);
+    DynamicArray(const std::initializer_list<T> list);
+    DynamicArray(const DynamicArray<T> &input_vector);
+    DynamicArray(DynamicArray<T> &&input_vector);
 
-        ~Vector() noexcept;
+        ~DynamicArray() noexcept;
 
         void push_back(const T &value);
         void push_front(const T &value);
@@ -40,8 +40,8 @@ class Vector
 
         T &operator[](const size_t index);
         T operator[](const size_t index) const;
-        Vector &operator=(const Vector<T> &other);
-        Vector &operator=(Vector<T> &&other);
+    DynamicArray &operator=(const DynamicArray<T> &other);
+    DynamicArray &operator=(DynamicArray<T> &&other);
 
         iterator begin() noexcept;
         iterator end() noexcept;
@@ -50,18 +50,18 @@ class Vector
         iterator cend() const noexcept;
 };
 
-template <typename T> Vector<T>::Vector()
+template <typename T> DynamicArray<T>::DynamicArray()
 {
     data = new T[1];
     capacity = 1;
 }
 
-template <typename T> Vector<T>::Vector(const size_t capacity) : capacity(capacity), size(capacity)
+template <typename T> DynamicArray<T>::DynamicArray(const size_t capacity) : capacity(capacity), size(capacity)
 {
     data = new T[capacity];
 }
 
-template <typename T> Vector<T>::Vector(const size_t size, T default_value) : size(size)
+template <typename T> DynamicArray<T>::DynamicArray(const size_t size, T default_value) : size(size)
 {
     data = new T[size * 2];
     if (data == nullptr)
@@ -70,7 +70,7 @@ template <typename T> Vector<T>::Vector(const size_t size, T default_value) : si
     std::fill(data, data + size, default_value);
 }
 
-template <typename T> Vector<T>::Vector(const std::initializer_list<T> list)
+template <typename T> DynamicArray<T>::DynamicArray(const std::initializer_list<T> list)
 {
     size = list.size();
     data = new T[size];
@@ -78,29 +78,29 @@ template <typename T> Vector<T>::Vector(const std::initializer_list<T> list)
     std::copy(list.begin(), list.end(), data);
 }
 
-template <typename T> Vector<T>::Vector(const Vector<T> &input_vector)
+template <typename T> DynamicArray<T>::DynamicArray(const DynamicArray<T> &input_vector)
 {
     *this = input_vector;
 }
 
-template <typename T> Vector<T>::Vector(Vector<T> &&input_vector)
+template <typename T> DynamicArray<T>::DynamicArray(DynamicArray<T> &&input_vector)
 {
     *this = std::move(input_vector);
 }
 
-template <typename T> Vector<T>::~Vector() noexcept
+template <typename T> DynamicArray<T>::~DynamicArray() noexcept
 {
     delete[] data;
 }
 
-template <typename T> void Vector<T>::push_back(const T &value)
+template <typename T> void DynamicArray<T>::push_back(const T &value)
 {
     if (size == capacity)
         resize(capacity * 2);
     data[size++] = value;
 }
 
-template <typename T> void Vector<T>::push_front(const T &value)
+template <typename T> void DynamicArray<T>::push_front(const T &value)
 {
     if (size == capacity)
         resize(capacity * 2);
@@ -108,18 +108,18 @@ template <typename T> void Vector<T>::push_front(const T &value)
     data[0] = value;
 }
 
-template <typename T> void Vector<T>::pop_back()
+template <typename T> void DynamicArray<T>::pop_back()
 {
     --size;
 }
 
-template <typename T> void Vector<T>::pop_front()
+template <typename T> void DynamicArray<T>::pop_front()
 {
     std::copy(data + 1, data + size, data);
     --size;
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::insert(iterator position, const T &value)
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::insert(iterator position, const T &value)
 {
     if (position > end() || position < begin())
         throw std::invalid_argument("Invalid position");
@@ -127,13 +127,13 @@ template <typename T> typename Vector<T>::iterator Vector<T>::insert(iterator po
     if (size == capacity)
         resize(capacity * 2);
     std::copy_backward(data + pos_index, data + size, data + size + 1);
-    Vector<T>::iterator new_pos = iterator(data + pos_index);
+    DynamicArray<T>::iterator new_pos = iterator(data + pos_index);
     *new_pos = value;
     ++size;
     return new_pos;
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::insert(iterator position, iterator first, iterator last)
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::insert(iterator position, iterator first, iterator last)
 {
     if (first > last || position > end() || position < begin())
         throw std::invalid_argument("Invalid range");
@@ -147,7 +147,7 @@ template <typename T> typename Vector<T>::iterator Vector<T>::insert(iterator po
     return iterator(data + pos_index);
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::erase(iterator position)
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::erase(iterator position)
 {
     if (position > end() || position < begin())
         throw std::invalid_argument("Invalid position");
@@ -156,7 +156,7 @@ template <typename T> typename Vector<T>::iterator Vector<T>::erase(iterator pos
     return iterator(position);
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::erase(iterator first, iterator last)
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::erase(iterator first, iterator last)
 {
     if (first > last || first < begin() || last > end())
         throw std::invalid_argument("Invalid range");
@@ -166,7 +166,7 @@ template <typename T> typename Vector<T>::iterator Vector<T>::erase(iterator fir
     return iterator(first);
 }
 
-template <typename T> void Vector<T>::resize(const size_t new_size)
+template <typename T> void DynamicArray<T>::resize(const size_t new_size)
 {
     if (new_size < size)
         throw std::runtime_error("Cannot resize to a smaller size");
@@ -177,31 +177,31 @@ template <typename T> void Vector<T>::resize(const size_t new_size)
     data = new_data;
 }
 
-template <typename T> bool Vector<T>::is_empty() const noexcept
+template <typename T> bool DynamicArray<T>::is_empty() const noexcept
 {
     return size == 0;
 }
 
-template <typename T> size_t Vector<T>::get_size() const noexcept
+template <typename T> size_t DynamicArray<T>::get_size() const noexcept
 {
     return size;
 }
 
-template <typename T> T &Vector<T>::operator[](const size_t index)
+template <typename T> T &DynamicArray<T>::operator[](const size_t index)
 {
     if (index >= size)
         throw std::out_of_range("Index out of range!");
     return data[index];
 }
 
-template <typename T> T Vector<T>::operator[](const size_t index) const
+template <typename T> T DynamicArray<T>::operator[](const size_t index) const
 {
     if (index >= size)
         throw std::out_of_range("Index out of range!");
     return data[index];
 }
 
-template <typename T> Vector<T> &Vector<T>::operator=(const Vector<T> &other)
+template <typename T> DynamicArray<T> &DynamicArray<T>::operator=(const DynamicArray<T> &other)
 {
     if (this == &other)
         return *this;
@@ -215,7 +215,7 @@ template <typename T> Vector<T> &Vector<T>::operator=(const Vector<T> &other)
     return *this;
 }
 
-template <typename T> Vector<T> &Vector<T>::operator=(Vector<T> &&other)
+template <typename T> DynamicArray<T> &DynamicArray<T>::operator=(DynamicArray<T> &&other)
 {
     if (this == &other)
         return *this;
@@ -229,23 +229,23 @@ template <typename T> Vector<T> &Vector<T>::operator=(Vector<T> &&other)
     return *this;
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::begin() noexcept
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::begin() noexcept
 {
     return iterator(data);
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::end() noexcept
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::end() noexcept
 {
     return iterator(data + size);
 }
 
-template <typename T> typename Vector<T>::iterator Vector<T>::cbegin() const noexcept
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::cbegin() const noexcept
 {
     return iterator(data);
 }
 
 
-template <typename T> typename Vector<T>::iterator Vector<T>::cend() const noexcept
+template <typename T> typename DynamicArray<T>::iterator DynamicArray<T>::cend() const noexcept
 {
     return iterator(data + size);
 }

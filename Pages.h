@@ -6,15 +6,15 @@
 class Page
 {
 private:
-    Vector<Row> page_;
+    DynamicArray<Row> page_;
 public:
     Page() = default;
     
-    Page(Vector<Row>& page)
+    Page(DynamicArray<Row>& page)
     {
         page_ = page;
     }
-    Page(Vector<Row>&& other) noexcept
+    Page(DynamicArray<Row>&& other) noexcept
         : page_(std::move(other)) {};
     
     void append(Row& line)
@@ -35,11 +35,11 @@ public:
 };
 
 
-Vector<Page> PageMaker(Vector<Row>& rows, int page_size)
+DynamicArray<Page> PageMaker(DynamicArray<Row>& rows, int page_size)
 {
-    Vector<Page> result;
+    DynamicArray<Page> result;
     int count = 0;
-    Vector<Row> buf;
+    DynamicArray<Row> buf;
     for (int i = 0; i < rows.get_size(); i++)
     {
         buf.push_back(rows[i]);

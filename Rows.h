@@ -31,9 +31,9 @@ public:
     }
 };
 
-Vector<Row> lexer(std::string& text, int row_size)
+DynamicArray<Row> lexer(std::string& text, int row_size)
 {
-    Vector<Row> result;
+    DynamicArray<Row> result;
     int count = 0;
     std::istringstream wordsStream(text);
     std::string line;

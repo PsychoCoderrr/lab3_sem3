@@ -42,9 +42,9 @@ Dictionary<std::string, std::vector<int>> buildAlphabeticalIndexFromFile(
         }
     }
 
-    Vector<Row> rows = lexer(inputText, rowSize);
+    DynamicArray<Row> rows = lexer(inputText, rowSize);
 
-    Vector<Page> pages = PageMaker(rows, pageSize);
+    DynamicArray<Page> pages = PageMaker(rows, pageSize);
     
     Book item(pages);
     std::string bookOutputFilePath = "/Users/vitalijkoldasev/Desktop/laboratories_3_sem/laboratory3/laboratory3/outputbook.txt";
